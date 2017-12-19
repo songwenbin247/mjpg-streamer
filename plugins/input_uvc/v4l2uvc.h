@@ -31,7 +31,7 @@
 #include <sys/ioctl.h>
 #include <sys/mman.h>
 #include <sys/select.h>
-#include <linux/videodev.h>
+#include <linux/videodev2.h>
 
 #include "uvcvideo.h"
 
@@ -48,6 +48,7 @@ struct vdIn {
     struct v4l2_requestbuffers rb;
     void *mem[NB_BUFFER];
     unsigned char *tmpbuffer;
+    unsigned int tmp_len;
     unsigned char *framebuffer;
     int isstreaming;
     int grabmethod;

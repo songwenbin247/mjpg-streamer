@@ -27,7 +27,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <string.h>
-#include <linux/videodev.h>
+#include <linux/videodev2.h>
 #include <sys/ioctl.h>
 #include <errno.h>
 #include <signal.h>
@@ -677,7 +677,7 @@ void *cam_thread( void *arg ) {
       exit(EXIT_FAILURE);
     }
   
-    DBG("received frame of size: %d\n", videoIn->buf.bytesused);
+    DBG("received frame of size: %d\n", videoIn->tmp_len);
 
     /*
      * Workaround for broken, corrupted frames:
@@ -686,7 +686,7 @@ void *cam_thread( void *arg ) {
      * For example a VGA (640x480) webcam picture is normally >= 8kByte large,
      * corrupted frames are smaller.
      */
-    if ( videoIn->buf.bytesused < minimum_size ) {
+    if ( videoIn->tmp_len < minimum_size ) {
       DBG("dropping too small frame, assuming it as broken\n");
       continue;
     }
@@ -706,7 +706,7 @@ void *cam_thread( void *arg ) {
     }
     else {
       DBG("copying frame\n");
-      pglobal->size = memcpy_picture(pglobal->buf, videoIn->tmpbuffer, videoIn->buf.bytesused);
+      pglobal->size = memcpy_picture(pglobal->buf, videoIn->tmpbuffer, videoIn->tmp_len);
     }
 
 #if 0

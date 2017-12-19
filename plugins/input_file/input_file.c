@@ -23,7 +23,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <string.h>
-#include <linux/videodev.h>
+#include <linux/videodev2.h>
 #include <sys/ioctl.h>
 #include <errno.h>
 #include <signal.h>
@@ -37,7 +37,7 @@
 #include "../../mjpg_streamer.h"
 #include "../../utils.h"
 
-#define INPUT_PLUGIN_NAME "FILE input plugin"
+#define INPUT_PLUGIN_NAME "open cv file "
 #define MAX_ARGUMENTS 32
 
 /* private functions and variables to this plugin */

@@ -27,6 +27,7 @@
 #include "v4l2uvc.h"
 #include "huffman.h"
 #include "dynctrl.h"
+#include <linux/videodev2.h>
 
 static int debug = 0;
 static int init_v4l2(struct vdIn *vd);
@@ -333,6 +334,7 @@ int uvcGrab(struct vdIn *vd)
       */
 
       memcpy(vd->tmpbuffer, vd->mem[vd->buf.index], vd->buf.bytesused);
+      vd->tmp_len = vd->buf.bytesused;
 
       if (debug)
         fprintf(stderr, "bytes in used %d \n", vd->buf.bytesused);
