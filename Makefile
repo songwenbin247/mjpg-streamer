@@ -25,9 +25,10 @@ clean:
 	make -C plugins/output_http $@
 	make -C plugins/output_autofocus $@
 #	make -C plugins/input_gspcav1 $@
+	make -C plugins/input_file $@
 	rm -f *.a *.o $(APP_BINARY) core *~ *.so *.lo
 
-plugins: input_uvc.so output_file.so output_http.so input_testpicture.so output_autofocus.so #input_gspcav1.so
+plugins: input_uvc.so output_file.so output_http.so input_testpicture.so output_autofocus.so input_file.so #input_gspcav1.so
 
 application: $(APP_BINARY)
 
@@ -50,6 +51,10 @@ output_file.so: mjpg_streamer.h utils.h
 output_http.so: mjpg_streamer.h utils.h
 	make -C plugins/output_http all
 	cp plugins/output_http/output_http.so .
+
+input_file.so: mjpg_streamer.h utils.h
+	make -C plugins/input_file all
+	cp plugins/input_file/input_file.so .
 
 #input_gspcav1.so: mjpg_streamer.h utils.h
 #	make -C plugins/input_gspcav1 all

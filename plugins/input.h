@@ -19,7 +19,8 @@
 # Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA    #
 #                                                                              #
 *******************************************************************************/
-
+#ifndef _________INPUT______H____
+#define _________INPUT______H____
 #define INPUT_PLUGIN_PREFIX " i: "
 #define IPRINT(...) { char _bf[1024] = {0}; snprintf(_bf, sizeof(_bf)-1, __VA_ARGS__); fprintf(stderr, "%s", INPUT_PLUGIN_PREFIX); fprintf(stderr, "%s", _bf); syslog(LOG_INFO, "%s", _bf); }
 
@@ -73,3 +74,4 @@ struct _input {
   int (*run)(void);
   int (*cmd)(in_cmd_type, int);
 };
+#endif
